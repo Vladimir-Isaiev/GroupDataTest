@@ -19,7 +19,7 @@ namespace GroupDataTest
 
         string[] filters;
 
-        string comm;
+        string subcomm;
         string command;
 
         public Form1()
@@ -38,7 +38,7 @@ namespace GroupDataTest
         string SqlCommand()
         {
             command = "SELECT ";
-            comm = "";
+            subcomm = "";
 
             if (filters[0] == "")
             {
@@ -48,11 +48,11 @@ namespace GroupDataTest
             {
                 for(int i = 0; i<=currentFilter; i++)
                 {
-                    comm += filters[i];
+                    subcomm += filters[i];
                 }
 
-                comm = comm.Remove(comm.Length-1, 1);//удаляем последнюю запятую
-                command = "SELECT " + comm + ", Sum(Quantity) as Quantity, Sum(Sum) as Sum FROM Shipments GROUP BY " + comm;
+                subcomm = subcomm.Remove(subcomm.Length-1, 1);//удаляем последнюю запятую
+                command = "SELECT " + subcomm + ", Sum(Quantity) as Quantity, Sum(Sum) as Sum FROM Shipments GROUP BY " + subcomm;
             }
             return command;
         }
@@ -91,7 +91,7 @@ namespace GroupDataTest
             filters[3] = "";
             filters[4] = "";
             currentFilter = -1;
-            comm = "";
+            subcomm = "";
             command = "";
         }
 

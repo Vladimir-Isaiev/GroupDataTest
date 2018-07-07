@@ -19,24 +19,16 @@ namespace GroupDataTest
             DataTable table = new DataTable();
 
 
-            try
-            {
+            connectionString = GetConnectionString();
 
-                connectionString = GetConnectionString();
+            SqlConnection connection = new SqlConnection(connectionString);
+            SqlCommand command = new SqlCommand(sqlCommand, connection);
+            SqlDataAdapter adapter = new SqlDataAdapter();
+            adapter.SelectCommand = command;
 
-                SqlConnection connection = new SqlConnection(connectionString);
+            table.Locale = System.Globalization.CultureInfo.InvariantCulture;
+            adapter.Fill(table);
 
-                SqlCommand command = new SqlCommand(sqlCommand, connection);
-                SqlDataAdapter adapter = new SqlDataAdapter();
-                adapter.SelectCommand = command;
-
-                table.Locale = System.Globalization.CultureInfo.InvariantCulture;
-                adapter.Fill(table);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
             return table;
         }
 
